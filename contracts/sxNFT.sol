@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract SxNFT is ERC721URIStorage { 
+contract SxNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
@@ -18,6 +18,7 @@ contract SxNFT is ERC721URIStorage {
     _mint(msg.sender, newItemId);
     _setTokenURI(newItemId, tokenURI);
 
+    // new item id
     return newItemId;
   }
 }
