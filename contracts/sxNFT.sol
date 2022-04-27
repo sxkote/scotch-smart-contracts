@@ -18,7 +18,7 @@ contract SxNFT is ERC721URIStorage {
     _mint(msg.sender, newItemId);
     _setTokenURI(newItemId, tokenURI);
 
-    // new item id
+    // new item id 2
     return newItemId;
   }
 }
