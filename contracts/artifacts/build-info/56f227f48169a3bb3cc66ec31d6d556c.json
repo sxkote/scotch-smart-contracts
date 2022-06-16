@@ -1,0 +1,313 @@
+{
+	"id": "56f227f48169a3bb3cc66ec31d6d556c",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.14",
+	"solcLongVersion": "0.8.14+commit.80d49f37",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/iDistributor.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.8;\r\n\r\ninterface IDistributor {\r\n    enum DistributorMode{\r\n        // 0: No Distributor Specified\r\n        None,\r\n        // 1: Beneficiary - simple the recipient of the money\r\n        Beneficiary,\r\n        // 2: Distributor - the service to distribute money\r\n        Distributor\r\n    }\r\n\r\n    struct DistributorInfo{\r\n        DistributorMode mode;\r\n        address payable recipient;\r\n    }\r\n\r\n    function distribute(uint256 marketItemId) external payable;\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/iDistributor.sol": {
+				"IDistributor": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "marketItemId",
+									"type": "uint256"
+								}
+							],
+							"name": "distribute",
+							"outputs": [],
+							"stateMutability": "payable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"distribute(uint256)": "91c05b0b"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.14+commit.80d49f37\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"marketItemId\",\"type\":\"uint256\"}],\"name\":\"distribute\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/iDistributor.sol\":\"IDistributor\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/iDistributor.sol\":{\"keccak256\":\"0x5315ec4c7e98cb5a71c084db8b9996850a6d2395b2085b1b6ff3b336aa300579\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a89072a9b91656bfc88e67aba0aca82d8c785efab3f5e7c78d25149b1d1fb913\",\"dweb:/ipfs/QmemVfro21nTKpSioGKUAWjZM6vjGnH35LfP1P7DJWpcN6\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/iDistributor.sol": {
+				"ast": {
+					"absolutePath": "contracts/iDistributor.sol",
+					"exportedSymbols": {
+						"IDistributor": [
+							17
+						]
+					},
+					"id": 18,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".8"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "IDistributor",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 17,
+							"linearizedBaseContracts": [
+								17
+							],
+							"name": "IDistributor",
+							"nameLocation": "70:12:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"canonicalName": "IDistributor.DistributorMode",
+									"id": 5,
+									"members": [
+										{
+											"id": 2,
+											"name": "None",
+											"nameLocation": "161:4:0",
+											"nodeType": "EnumValue",
+											"src": "161:4:0"
+										},
+										{
+											"id": 3,
+											"name": "Beneficiary",
+											"nameLocation": "239:11:0",
+											"nodeType": "EnumValue",
+											"src": "239:11:0"
+										},
+										{
+											"id": 4,
+											"name": "Distributor",
+											"nameLocation": "322:11:0",
+											"nodeType": "EnumValue",
+											"src": "322:11:0"
+										}
+									],
+									"name": "DistributorMode",
+									"nameLocation": "95:15:0",
+									"nodeType": "EnumDefinition",
+									"src": "90:250:0"
+								},
+								{
+									"canonicalName": "IDistributor.DistributorInfo",
+									"id": 11,
+									"members": [
+										{
+											"constant": false,
+											"id": 8,
+											"mutability": "mutable",
+											"name": "mode",
+											"nameLocation": "397:4:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 11,
+											"src": "381:20:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_enum$_DistributorMode_$5",
+												"typeString": "enum IDistributor.DistributorMode"
+											},
+											"typeName": {
+												"id": 7,
+												"nodeType": "UserDefinedTypeName",
+												"pathNode": {
+													"id": 6,
+													"name": "DistributorMode",
+													"nodeType": "IdentifierPath",
+													"referencedDeclaration": 5,
+													"src": "381:15:0"
+												},
+												"referencedDeclaration": 5,
+												"src": "381:15:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_enum$_DistributorMode_$5",
+													"typeString": "enum IDistributor.DistributorMode"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 10,
+											"mutability": "mutable",
+											"name": "recipient",
+											"nameLocation": "428:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 11,
+											"src": "412:25:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address_payable",
+												"typeString": "address payable"
+											},
+											"typeName": {
+												"id": 9,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "412:15:0",
+												"stateMutability": "payable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address_payable",
+													"typeString": "address payable"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "DistributorInfo",
+									"nameLocation": "355:15:0",
+									"nodeType": "StructDefinition",
+									"scope": 17,
+									"src": "348:97:0",
+									"visibility": "public"
+								},
+								{
+									"functionSelector": "91c05b0b",
+									"id": 16,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "distribute",
+									"nameLocation": "462:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 14,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 13,
+												"mutability": "mutable",
+												"name": "marketItemId",
+												"nameLocation": "481:12:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "473:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 12,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "473:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "472:22:0"
+									},
+									"returnParameters": {
+										"id": 15,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "511:0:0"
+									},
+									"scope": 17,
+									"src": "453:59:0",
+									"stateMutability": "payable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 18,
+							"src": "60:455:0",
+							"usedErrors": []
+						}
+					],
+					"src": "33:482:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

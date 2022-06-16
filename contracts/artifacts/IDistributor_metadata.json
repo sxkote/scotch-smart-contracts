@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.14+commit.80d49f37"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "marketItemId",
+						"type": "uint256"
+					}
+				],
+				"name": "distribute",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/iDistributor.sol": "IDistributor"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/iDistributor.sol": {
+			"keccak256": "0xfb3cd81c7eb8b206880730e8c600bba6a3f192e64346b2daa40d916075f9a3d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://410ce4a06cfc351116a74ab6455069e79d7e34fc58e089da69c463853815a8b6",
+				"dweb:/ipfs/QmfJHpZt5GKj1XE9YF3NCs34TwGPzSRtYTkaKBvUWQgyhk"
+			]
+		}
+	},
+	"version": 1
+}

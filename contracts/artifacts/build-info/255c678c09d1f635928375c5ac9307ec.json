@@ -1,0 +1,392 @@
+{
+	"id": "255c678c09d1f635928375c5ac9307ec",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.14",
+	"solcLongVersion": "0.8.14+commit.80d49f37",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/iPartners.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.8;\r\n\r\ninterface Calculator {\r\n    struct Partner {\r\n      uint id;\r\n      string name;\r\n      address payable recipient;\r\n      uint cashbackRate;\r\n    }\r\n\r\n    function getPartnerByName(string memory name) external view returns (Partner memory);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/iPartners.sol": {
+				"Calculator": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "string",
+									"name": "name",
+									"type": "string"
+								}
+							],
+							"name": "getPartnerByName",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "id",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "address payable",
+											"name": "recipient",
+											"type": "address"
+										},
+										{
+											"internalType": "uint256",
+											"name": "cashbackRate",
+											"type": "uint256"
+										}
+									],
+									"internalType": "struct Calculator.Partner",
+									"name": "",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"getPartnerByName(string)": "dfa9d96e"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.14+commit.80d49f37\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"getPartnerByName\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address payable\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"cashbackRate\",\"type\":\"uint256\"}],\"internalType\":\"struct Calculator.Partner\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/iPartners.sol\":\"Calculator\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/iPartners.sol\":{\"keccak256\":\"0x0ee97fb1dcc8d5c7623da97538d7504d014fc6c5e63489740a3c65c236e99e21\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://db7430ad99301503d19049e7288e18e310f8ef151d487acdb15d5236c172a62a\",\"dweb:/ipfs/QmXQxL8ZmR4NMcr8b5wAzeCN1GXKNkXfk13Ebcti26CSfa\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/iPartners.sol": {
+				"ast": {
+					"absolutePath": "contracts/iPartners.sol",
+					"exportedSymbols": {
+						"Calculator": [
+							19
+						]
+					},
+					"id": 20,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".8"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "Calculator",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 19,
+							"linearizedBaseContracts": [
+								19
+							],
+							"name": "Calculator",
+							"nameLocation": "70:10:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"canonicalName": "Calculator.Partner",
+									"id": 10,
+									"members": [
+										{
+											"constant": false,
+											"id": 3,
+											"mutability": "mutable",
+											"name": "id",
+											"nameLocation": "117:2:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 10,
+											"src": "112:7:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 2,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "112:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 5,
+											"mutability": "mutable",
+											"name": "name",
+											"nameLocation": "135:4:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 10,
+											"src": "128:11:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 4,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "128:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 7,
+											"mutability": "mutable",
+											"name": "recipient",
+											"nameLocation": "164:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 10,
+											"src": "148:25:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address_payable",
+												"typeString": "address payable"
+											},
+											"typeName": {
+												"id": 6,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "148:15:0",
+												"stateMutability": "payable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address_payable",
+													"typeString": "address payable"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 9,
+											"mutability": "mutable",
+											"name": "cashbackRate",
+											"nameLocation": "187:12:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 10,
+											"src": "182:17:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 8,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "182:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "Partner",
+									"nameLocation": "95:7:0",
+									"nodeType": "StructDefinition",
+									"scope": 19,
+									"src": "88:119:0",
+									"visibility": "public"
+								},
+								{
+									"functionSelector": "dfa9d96e",
+									"id": 18,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getPartnerByName",
+									"nameLocation": "224:16:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 13,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 12,
+												"mutability": "mutable",
+												"name": "name",
+												"nameLocation": "255:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 18,
+												"src": "241:18:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 11,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "241:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "240:20:0"
+									},
+									"returnParameters": {
+										"id": 17,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 18,
+												"src": "284:14:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Partner_$10_memory_ptr",
+													"typeString": "struct Calculator.Partner"
+												},
+												"typeName": {
+													"id": 15,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 14,
+														"name": "Partner",
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 10,
+														"src": "284:7:0"
+													},
+													"referencedDeclaration": 10,
+													"src": "284:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Partner_$10_storage_ptr",
+														"typeString": "struct Calculator.Partner"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "283:16:0"
+									},
+									"scope": 19,
+									"src": "215:85:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 20,
+							"src": "60:243:0",
+							"usedErrors": []
+						}
+					],
+					"src": "33:270:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

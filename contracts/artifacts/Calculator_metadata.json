@@ -1,0 +1,87 @@
+{
+	"compiler": {
+		"version": "0.8.14+commit.80d49f37"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "getPartnerByName",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "recipient",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "cashbackRate",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Calculator.Partner",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/iPartners.sol": "Calculator"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/iPartners.sol": {
+			"keccak256": "0x0ee97fb1dcc8d5c7623da97538d7504d014fc6c5e63489740a3c65c236e99e21",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db7430ad99301503d19049e7288e18e310f8ef151d487acdb15d5236c172a62a",
+				"dweb:/ipfs/QmXQxL8ZmR4NMcr8b5wAzeCN1GXKNkXfk13Ebcti26CSfa"
+			]
+		}
+	},
+	"version": 1
+}
