@@ -34,13 +34,13 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   }
 
   // Beneficiary Model
-  struct Beneficiary{
-      BeneficiaryMode mode;       // mode of the beneficiary send funds
-      address payable recipient;  // beneficiary recipient address
+  struct Beneficiary {
+    BeneficiaryMode mode;       // mode of the beneficiary send funds
+    address payable recipient;  // beneficiary recipient address
   }
 
   // input for market-item placement
-  struct MarketItemInput{
+  struct MarketItemInput {
     address tokenContract;
     uint256 tokenId;
     address priceContract;
@@ -97,7 +97,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // collection of market-rates
   mapping(address => MarketRate) private _rates;
 
-   // mapping of (marketItemID, buyer address) => allowed to buy flag
+  // mapping of (marketItemID, buyer address) => allowed to buy flag
   mapping(uint256 => mapping(address => bool))  private _allowedToBuy;
 
 
@@ -168,7 +168,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     // charge listing-price from seller
     _chargeFunds(listingPrice * input.length, "Listing Price should be sent to place NFT on the Marketplace");
 
-    for (uint i = 0; i < input.length; i++)
+    for (uint i = 0; i < input.length; i++) 
     {
       require(input[i].priceAmount > 0, "Price must be positive (at least 1 wei)");
 
@@ -198,8 +198,11 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
     // nft token contract && approval for nft
     ERC721 hostTokenContract = ERC721(_items[marketItemId].tokenContract);
-    address approvedAddress = hostTokenContract.getApproved(tokenId);
-    require(approvedAddress == address(this), "Market Item (NFT) should be approved to the Marketplace");
+    bool allApproved = hostTokenContract.isApprovedForAll(seller, address(this));
+    if (!allApproved) {
+      address approvedAddress = hostTokenContract.getApproved(tokenId);
+      require(approvedAddress == address(this), "Market Item (NFT) should be approved to the Marketplace");
+    }
 
     // check white-list if it was set up
     if (_items[marketItemId].whiteList.length > 0)
@@ -341,7 +344,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
       uint256 balance = marketplace.balance;
       require(balance >= amount, "Send Amount exceeds Marketplace's native token balance!");
 
-        // send native token amount to _beneficiar
+      // send native token amount to _beneficiar
       _beneficiary.recipient.transfer(amount);
     }
     else {
@@ -384,10 +387,15 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     if (tokenOwner != seller)
       return - 1;
 
-    // get approved address of the NFT (NFT should be approved to Marketplace)
-    address tokenApproved = hostTokenContract.getApproved(tokenId);
-    if (tokenApproved != address(this))
-      return - 2;
+    // check approval for all
+    bool allApproved = hostTokenContract.isApprovedForAll(seller, address(this));
+    if (!allApproved)
+    {
+      // get approved address of the NFT (NFT should be approved to Marketplace)
+      address tokenApproved = hostTokenContract.getApproved(tokenId);
+      if (tokenApproved != address(this))
+        return - 2;
+    }
 
     return 0;
   }
@@ -405,29 +413,29 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
     // create new market-item
     _items[marketItemId] = MarketItem(
-      marketItemId,             // ID of the market item
-      input.tokenContract,      // token Contract
-      input.tokenId,            // token ID
-      payable(seller),          // seller
-      payable(address(0)),      // buyer
-      input.priceContract,      // price Contract
-      input.priceAmount,              // price value
-      MarketItemStatus.Active,  // status
-      0,                        // fee value
-      position,                 // position
-      0,                        // partnerId
+      marketItemId, // ID of the market item
+      input.tokenContract, // token Contract
+      input.tokenId, // token ID
+      payable(seller), // seller
+      payable(address(0)), // buyer
+      input.priceContract, // price Contract
+      input.priceAmount, // price value
+      MarketItemStatus.Active, // status
+      0, // fee value
+      position, // position
+      0, // partnerId
       input.whiteList           // white list
     );
 
     // update token position to active market-item position
     _activeTokens[input.tokenContract][input.tokenId] = position;
 
-     // setup white list for market item
-     if (input.whiteList.length > 0)
-     {
-       for (uint i; i < input.whiteList.length; i++)
-         _allowedToBuy[marketItemId][input.whiteList[i]] = true;
-     }
+    // setup white list for market item
+    if (input.whiteList.length > 0)
+    {
+      for (uint i; i < input.whiteList.length; i++)
+        _allowedToBuy[marketItemId][input.whiteList[i]] = true;
+    }
 
     emit MarketItemPlaced(marketItemId, input.tokenContract, input.tokenId, seller, input.priceContract, input.priceAmount);
   }
@@ -448,7 +456,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     _items[marketItemId].position = 0;
 
     // replacing current active-market-item with last element
-    if (index < _activeItems.length - 1){
+    if (index < _activeItems.length - 1) {
       // define last active-market-item ID
       uint256 lastItemId = _activeItems[_activeItems.length - 1];
       // replacing with last element
