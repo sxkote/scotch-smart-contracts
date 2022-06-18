@@ -244,6 +244,11 @@
 								"internalType": "uint256",
 								"name": "partnerId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address[]",
+								"name": "whiteList",
+								"type": "address[]"
 							}
 						],
 						"internalType": "struct ScotchMarketplace.MarketItem",
@@ -412,6 +417,11 @@
 								"internalType": "uint256",
 								"name": "partnerId",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address[]",
+								"name": "whiteList",
+								"type": "address[]"
 							}
 						],
 						"internalType": "struct ScotchMarketplace.MarketItem",
@@ -509,9 +519,54 @@
 						"internalType": "uint256",
 						"name": "price",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "whiteList",
+						"type": "address[]"
 					}
 				],
 				"name": "placeMarketItem",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "tokenContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "priceContract",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "priceAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address[]",
+								"name": "whiteList",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct ScotchMarketplace.MarketItemInput[]",
+						"name": "input",
+						"type": "tuple[]"
+					}
+				],
+				"name": "placeMarketItems",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -762,11 +817,11 @@
 			]
 		},
 		"contracts/scMarketplace.sol": {
-			"keccak256": "0xd846332d834fa62809b6bf6628fa343735f38109a55d188870fcd0ad09c96fb4",
+			"keccak256": "0xa7371d5a4edb03e6fc6d33c15b51a097a569930fe3272a61691a8275d15071a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a0e41157ed4c2b49ebd76fe24ddfe58e45ba36c11bef16726918f3ae948b4f70",
-				"dweb:/ipfs/QmXEMt9rdbxBGqnJBg4KTdtR4aPeNFYK53ybUxE3DVUEH8"
+				"bzz-raw://ce069a19bfe7dfad22651381642d30ed0398ccb207c2205333c4ab412472fad8",
+				"dweb:/ipfs/QmXeHq5UyJnvFgh8qz5ZT9cfGYjCPUfTPdrcYRxHMU7Duj"
 			]
 		}
 	},

@@ -14,13 +14,13 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // Market-Item Status
   enum MarketItemStatus {
     // 0: market-item is active and can be sold
-    Active, 
+    Active,
     // 1: market-item is already sold
-    Sold, 
+    Sold,
     // 2: market-item is cancelled by NFT owner
-    Cancelled, 
+    Cancelled,
     // 3: market-item is deleted by Scotch owner
-    Deleted     
+    Deleted
   }
 
   // Beneficiary (commission recipient) Mode
@@ -39,6 +39,14 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
       address payable recipient;  // beneficiary recipient address
   }
 
+  // input for market-item placement
+  struct MarketItemInput{
+    address tokenContract;
+    uint256 tokenId;
+    address priceContract;
+    uint256 priceAmount;
+    address[] whiteList;
+  }
 
   // Market-Rate structure
   struct MarketRate {
@@ -61,6 +69,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     uint256 fee;              // amount of fee (in ERC-20 price tokens) that were charged during the sale
     uint256 position;         // positive position in active market-items array (1..N)
     uint partnerId;           // Id of the partner, from which the sale was made
+    address[] whiteList;      // white list of addresses that could buy market-item
   }
 
   // Events of Marketplace
@@ -75,7 +84,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
   // beneficiary - receiver of the commission - the address where the commission funds will be sent
   Beneficiary private _beneficiary;
-  
+
   // collection of market-items
   mapping(uint256 => MarketItem) private _items;
 
@@ -87,6 +96,10 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
   // collection of market-rates
   mapping(address => MarketRate) private _rates;
+
+   // mapping of (marketItemID, buyer address) => allowed to buy flag
+  mapping(uint256 => mapping(address => bool))  private _allowedToBuy;
+
 
 
   constructor() {
@@ -114,7 +127,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // ===========================================
 
   // create new market-item - listing of original NFT on Marketplace
-  function placeMarketItem(address tokenContract, uint256 tokenId, address priceContract, uint256 price) public payable {
+  function placeMarketItem(address tokenContract, uint256 tokenId, address priceContract, uint256 price, address[] memory whiteList) public payable {
     require(price > 0, "Price must be positive (at least 1 wei)");
 
     // check if token is already placed in the market
@@ -132,12 +145,46 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
     // market-rate for seller
     uint256 listingPrice = _getValidRate(seller).listingPrice;
-    
+
     // charge listing-price from seller
     _chargeFunds(listingPrice, "Listing Price should be sent to place NFT on the Marketplace");
 
+    // build market-item input
+    MarketItemInput memory input = MarketItemInput(tokenContract, tokenId, priceContract, price, whiteList);
+
     // create market-item
-    _createMarketItem(tokenContract, tokenId, seller, priceContract, price);
+    _createMarketItem(seller, input);
+  }
+
+  function placeMarketItems(MarketItemInput[] memory input) public payable {
+    require(input.length > 0, "At least one item input should be specified");
+
+    // seller of the Token
+    address seller = _msgSender();
+
+    // market-rate for seller
+    uint256 listingPrice = _getValidRate(seller).listingPrice;
+
+    // charge listing-price from seller
+    _chargeFunds(listingPrice * input.length, "Listing Price should be sent to place NFT on the Marketplace");
+
+    for (uint i = 0; i < input.length; i++)
+    {
+      require(input[i].priceAmount > 0, "Price must be positive (at least 1 wei)");
+
+      // check if token is already placed in the market
+      uint256 existingMarketItemId = findActiveMarketItem(input[i].tokenContract, input[i].tokenId);
+      require(existingMarketItemId == 0, "That token is already placed on the market");
+
+      // token validation
+      int validation = _checkTokenValidity(seller, input[i].tokenContract, input[i].tokenId);
+      require(validation != - 1, "Only owner of the NFT can place it to the Marketplace");
+      require(validation != - 2, "NFT should be approved to the Marketplace");
+      require(validation == 0, "NFT is not valid to be sold on the Marketplace");
+
+      // create market-item
+      _createMarketItem(seller, input[i]);
+    }
   }
 
   // make deal on sell market-item, receive payment and transfer original NFT
@@ -153,6 +200,10 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     ERC721 hostTokenContract = ERC721(_items[marketItemId].tokenContract);
     address approvedAddress = hostTokenContract.getApproved(tokenId);
     require(approvedAddress == address(this), "Market Item (NFT) should be approved to the Marketplace");
+
+    // check white-list if it was set up
+    if (_items[marketItemId].whiteList.length > 0)
+      require(_allowedToBuy[marketItemId][buyer] == true, "Your address is not specified in White-List for current Market Item");
 
     // charge price from seller & send to buyer & beneficiary
     uint256 feeAmount = _chargePrice(marketItemId, buyer);
@@ -173,7 +224,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     {
       // build distributor Host Contract
       IDistributor distributorHost = IDistributor(_beneficiary.recipient);
-      distributorHost.distribute(marketItemId); 
+      distributorHost.distribute(marketItemId);
     }
 
     emit MarketItemSold(marketItemId, buyer);
@@ -270,7 +321,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   function changeBeneficiary(BeneficiaryMode mode, address payable recipient) public onlyOwner {
     if (mode == BeneficiaryMode.None)
       require(recipient == address(0), "Beneficiar mode None requires zero address for recipient!");
-    else 
+    else
       require(recipient != address(0), "Beneficiary recipient address should be specified!");
 
     _beneficiary.mode = mode;
@@ -290,7 +341,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
       uint256 balance = marketplace.balance;
       require(balance >= amount, "Send Amount exceeds Marketplace's native token balance!");
 
-        // send native token amount to distributor
+        // send native token amount to _beneficiar
       _beneficiary.recipient.transfer(amount);
     }
     else {
@@ -342,7 +393,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   }
 
   // add new MaketItem to Marketplace
-  function _createMarketItem(address tokenContract, uint256 tokenId, address seller, address priceContract, uint256 price) private {
+  function _createMarketItem(address seller, MarketItemInput memory input) private {
     // new market-item ID
     _itemIds.increment();
     uint256 marketItemId = _itemIds.current();
@@ -355,22 +406,30 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     // create new market-item
     _items[marketItemId] = MarketItem(
       marketItemId,             // ID of the market item
-      tokenContract,            // token Contract
-      tokenId,                  // token ID
+      input.tokenContract,      // token Contract
+      input.tokenId,            // token ID
       payable(seller),          // seller
       payable(address(0)),      // buyer
-      priceContract,            // price Contract
-      price,                    // price value
+      input.priceContract,      // price Contract
+      input.priceAmount,              // price value
       MarketItemStatus.Active,  // status
       0,                        // fee value
       position,                 // position
-      0                         // partnerId
+      0,                        // partnerId
+      input.whiteList           // white list
     );
 
     // update token position to active market-item position
-    _activeTokens[tokenContract][tokenId] = position;
+    _activeTokens[input.tokenContract][input.tokenId] = position;
 
-    emit MarketItemPlaced(marketItemId, tokenContract, tokenId, seller, priceContract, price);
+     // setup white list for market item
+     if (input.whiteList.length > 0)
+     {
+       for (uint i; i < input.whiteList.length; i++)
+         _allowedToBuy[marketItemId][input.whiteList[i]] = true;
+     }
+
+    emit MarketItemPlaced(marketItemId, input.tokenContract, input.tokenId, seller, input.priceContract, input.priceAmount);
   }
 
   // remove market-item from marketplace
@@ -428,7 +487,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // charge price and fees during the deal
   function _chargePrice(
     uint256 marketItemId,
-    address buyer) 
+    address buyer)
   private returns (uint256) {
     // address of the market-item seller
     address payable seller = _items[marketItemId].seller;
