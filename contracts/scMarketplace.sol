@@ -8,8 +8,9 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./iDistributor.sol";
-
-contract ScotchMarketplace is Ownable, ReentrancyGuard {
+import "./scBeneficiary.sol";
+ 
+contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
 
   // Market-Item Status
   enum MarketItemStatus {
@@ -21,22 +22,6 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     Cancelled,
     // 3: market-item is deleted by Scotch owner
     Deleted
-  }
-
-  // Beneficiary (commission recipient) Mode
-  enum BeneficiaryMode{
-    // 0: No Beneficiary Specified
-    None,
-    // 1: Beneficiary - simple the recipient address
-    Beneficiary,
-    // 2: Distributor - the service to distribute money
-    Distributor
-  }
-
-  // Beneficiary Model
-  struct Beneficiary {
-    BeneficiaryMode mode;       // mode of the beneficiary send funds
-    address payable recipient;  // beneficiary recipient address
   }
 
   // input for market-item placement
@@ -82,9 +67,6 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   using Counters for Counters.Counter;
   Counters.Counter private _itemIds;
 
-  // beneficiary - receiver of the commission - the address where the commission funds will be sent
-  Beneficiary private _beneficiary;
-
   // collection of market-items
   mapping(uint256 => MarketItem) private _items;
 
@@ -100,12 +82,16 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // mapping of (marketItemID, buyer address) => allowed to buy flag
   mapping(uint256 => mapping(address => bool))  private _allowedToBuy;
 
+  // maximal amount of items, that could be sold in one transaction
+  uint public _maxItemsForSale;
+
 
 
   constructor() {
     _beneficiary = Beneficiary(BeneficiaryMode.None, payable(address(0)));
     _activeItems = new uint256[](0);
     _rates[address(0)] = MarketRate(true, 0, 0, 3);
+    _maxItemsForSale = 100;
   }
 
   // ===========================================
@@ -158,6 +144,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
 
   function placeMarketItems(MarketItemInput[] memory input) public payable {
     require(input.length > 0, "At least one item input should be specified");
+    require(input.length <= _maxItemsForSale, "Amount of specified items exceeds Maximum Allowed Amount");
 
     // seller of the Token
     address seller = _msgSender();
@@ -168,7 +155,7 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     // charge listing-price from seller
     _chargeFunds(listingPrice * input.length, "Listing Price should be sent to place NFT on the Marketplace");
 
-    for (uint i = 0; i < input.length; i++) 
+    for (uint i = 0; i < input.length; i++)
     {
       require(input[i].priceAmount > 0, "Price must be positive (at least 1 wei)");
 
@@ -259,11 +246,6 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     return _getValidRate(_msgSender());
   }
 
-  // get current beneficiary info
-  function getBeneficiary() public view returns (Beneficiary memory) {
-    return _beneficiary;
-  }
-
   // get market-item info by id
   function getMarketItem(uint256 marketItemId) public view idExists(marketItemId) returns (MarketItem memory) {
     return _items[marketItemId];
@@ -296,6 +278,11 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
   // =========== Owner's functions =============
   // ===========================================
 
+  // set maximum amount of items that could be sold
+  function setMaxItemsForSale(uint maxItemsForSale) public onlyOwner {
+    _maxItemsForSale = maxItemsForSale;
+  }
+
   // get Rate for specific address
   function getCustomRate(address adr) public view onlyOwner returns (MarketRate memory){
     return _getCustomRate(adr);
@@ -319,45 +306,6 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     // remove market-item with Deleted status
     _removeMarketItem(marketItemId, MarketItemStatus.Deleted);
   }
-
-  // change beneficiary of the Scotch Marketplace
-  function changeBeneficiary(BeneficiaryMode mode, address payable recipient) public onlyOwner {
-    if (mode == BeneficiaryMode.None)
-      require(recipient == address(0), "Beneficiar mode None requires zero address for recipient!");
-    else
-      require(recipient != address(0), "Beneficiary recipient address should be specified!");
-
-    _beneficiary.mode = mode;
-    _beneficiary.recipient = recipient;
-  }
-
-  // send accumulated fee funds of the Marketplace to recipient (native-token = zero tokenContract)
-  function sendFunds(uint256 amount, address tokenContract) public onlyOwner {
-    require(_isBeneficiaryExists(), "Beneficiary should be specified!");
-    require(amount > 0, "Send Amount should be positive!");
-
-    // address of the Scotch Marketplace
-    address marketplace = address(this);
-
-    if (tokenContract == address(0)) {
-      // get Scotch Marketplace balance in native token
-      uint256 balance = marketplace.balance;
-      require(balance >= amount, "Send Amount exceeds Marketplace's native token balance!");
-
-      // send native token amount to _beneficiar
-      _beneficiary.recipient.transfer(amount);
-    }
-    else {
-      // get ERC-20 Token Contract
-      ERC20 hostTokenContract = ERC20(tokenContract);
-      // get Scotch Marketplace balance in ERC-20 Token
-      uint256 balance = hostTokenContract.balanceOf(marketplace);
-      require(balance >= amount, "Send Amount exceeds Marketplace's ERC-20 token balance!");
-      // send ERC-20 token amount to recipient
-      hostTokenContract.transfer(_beneficiary.recipient, amount);
-    }
-  }
-
 
 
   // ===========================================
@@ -475,22 +423,6 @@ contract ScotchMarketplace is Ownable, ReentrancyGuard {
     emit MarketItemRemoved(marketItemId, status);
   }
 
-  // check if beneficiary is specified to send funds
-  function _isBeneficiaryExists() private view returns (bool){
-    return _beneficiary.mode != BeneficiaryMode.None && _beneficiary.recipient != address(0);
-  }
-
-  // charge funds from caller in native tokens
-  function _chargeFunds(uint256 amount, string memory message) private {
-    if (amount > 0) {
-      // check payment for appropriate funds amount
-      require(msg.value >= amount, message);
-
-      // send funds to _beneficiary
-      if (_isBeneficiaryExists())
-        _beneficiary.recipient.transfer(msg.value);
-    }
-  }
 
   // charge price and fees during the deal
   function _chargePrice(

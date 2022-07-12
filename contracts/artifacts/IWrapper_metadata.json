@@ -1,0 +1,100 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_underlineContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_unwrapAfter",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_transferFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_royaltyBeneficiary",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_royaltyPercent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_unwraptFeeThreshold",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_transferFeeToken",
+						"type": "address"
+					}
+				],
+				"name": "wrap721",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/iWrapper.sol": "IWrapper"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/iWrapper.sol": {
+			"keccak256": "0xa6e869801686cb7a00756c2ab8d177c48421ea7f028c75a14eb3a46284a819ee",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7a1cb21c5b9e957051ce87032bb74b7eced7943cd7247a9870506b330dce891d",
+				"dweb:/ipfs/QmYozq3cEHpwuDMMjqv62Y83dEyptKZY7j9AjQZaLm8dSa"
+			]
+		}
+	},
+	"version": 1
+}
