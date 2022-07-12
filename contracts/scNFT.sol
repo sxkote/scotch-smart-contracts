@@ -11,7 +11,7 @@ contract ScotchNFT is ScotchBeneficiary, ERC721URIStorage {
   Counters.Counter private _tokenIds;
 
   // maximum amount of NFTs to mint
-  uint _maxNftToMint;
+  uint _maxNftToMint; 
 
   // price for minting NFT
   uint256 _mintingPrice;
