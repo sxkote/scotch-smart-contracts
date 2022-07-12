@@ -600,7 +600,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -735,11 +735,11 @@
 			]
 		},
 		"contracts/scNFT.sol": {
-			"keccak256": "0x27e4f82454140b8c1ee755686a2fb7ce65b1a11d3ddbbe65a09e60ed44d72933",
+			"keccak256": "0xc5762bd1ff04ec519755930b1aa52e019a18697e8f9aa3367aafcbe30cb39aa7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a0884b0003f6cca10c9e3764822bb9c7f95f2b947869d96dba6144d9969417bc",
-				"dweb:/ipfs/QmbYFEsonRpmuNP4p6LCjv9AmZJEWck6SpMU5gNBhN1paV"
+				"bzz-raw://3ba27e96a940bee25eb458f9f92eb542b3af16f12358e840c48eb089b4b4a96d",
+				"dweb:/ipfs/QmPrSZdy6CDNen1X2vmHt9rTDHfpAscSQrP2V4aNYHq16U"
 			]
 		}
 	},
