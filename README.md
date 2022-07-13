@@ -4,6 +4,36 @@ SCOTCH.SALE Smart Contract
 
 Source Code: `/contracts/`
 
+v1.8:
+--
+
+**1. Ограничение на Mass Sell**
+
+Для ограничения количества токенов, которые можно разместить на маркетплейсе в рамках одной транзакции,
+введена переменная
+
+`uint public _maxItemsForSale`
+
+При массвом размещении количество токенов сверяется с этим значением:
+
+`require(input.length <= _maxItemsForSale, "Amount of specified items exceeds Maximum Allowed Amount");`
+
+Ограничение можно менять:
+
+` function setMaxItemsForSale(uint maxItemsForSale) public onlyOwner {
+_maxItemsForSale = maxItemsForSale;
+}`
+
+**2. Функционал бенефициара вынесен в абстрактный контракт ScotchBeneficiary**
+
+В абстрактный контракт вынесен функционал связанный с:
+ - определением бенефициара
+ - изменением бенефициара
+ - отправкой средств с контракта 
+ - взыманием платы в нативных токенах
+
+Код и связанные методы были просто перенесены в абстрактный класс без изменений (с учетом смены private на internal).
+
 
 v1.7:
 --

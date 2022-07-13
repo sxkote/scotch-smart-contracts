@@ -9,7 +9,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./iDistributor.sol";
 import "./scBeneficiary.sol";
- 
+
+// V1.8
 contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
 
   // Market-Item Status
