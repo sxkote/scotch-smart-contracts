@@ -1,0 +1,481 @@
+{
+	"id": "83e8bfd66373db008e94925e053f02cd",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.15",
+	"solcLongVersion": "0.8.15+commit.e14f2714",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/scLogger.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.8;\r\n\r\nabstract contract ScotchLogger {\r\n\r\n  string[] public _logs;\r\n\r\n  constructor(){\r\n    _logs = new string[](0);\r\n  }\r\n\r\n  function _log(string memory message) internal {\r\n    _logs.push(message);\r\n  }\r\n}\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			}
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/scLogger.sol": {
+				"ScotchLogger": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"name": "_logs",
+							"outputs": [
+								{
+									"internalType": "string",
+									"name": "",
+									"type": "string"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"_logs(uint256)": "4b0f51b8"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_logs\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/scLogger.sol\":\"ScotchLogger\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/scLogger.sol\":{\"keccak256\":\"0x4b3382b15bfbb2bcd949013dcfd4373611ec16a35226a5d7bc5f6ede0fdf4a57\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d80c7aae31e450dc0f43e88274702d78b75d2ae4aa5e86d7c87c1401fe578e9c\",\"dweb:/ipfs/QmVotQ7bxW44Tjf18iZJ6Vf8PvaQW6jxE83TcoqvNRjoNx\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 4,
+								"contract": "contracts/scLogger.sol:ScotchLogger",
+								"label": "_logs",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_array(t_string_storage)dyn_storage"
+							}
+						],
+						"types": {
+							"t_array(t_string_storage)dyn_storage": {
+								"base": "t_string_storage",
+								"encoding": "dynamic_array",
+								"label": "string[]",
+								"numberOfBytes": "32"
+							},
+							"t_string_storage": {
+								"encoding": "bytes",
+								"label": "string",
+								"numberOfBytes": "32"
+							}
+						}
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/scLogger.sol": {
+				"ast": {
+					"absolutePath": "contracts/scLogger.sol",
+					"exportedSymbols": {
+						"ScotchLogger": [
+							29
+						]
+					},
+					"id": 30,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".8"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": true,
+							"baseContracts": [],
+							"canonicalName": "ScotchLogger",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"fullyImplemented": true,
+							"id": 29,
+							"linearizedBaseContracts": [
+								29
+							],
+							"name": "ScotchLogger",
+							"nameLocation": "78:12:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"constant": false,
+									"functionSelector": "4b0f51b8",
+									"id": 4,
+									"mutability": "mutable",
+									"name": "_logs",
+									"nameLocation": "114:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 29,
+									"src": "98:21:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+										"typeString": "string[]"
+									},
+									"typeName": {
+										"baseType": {
+											"id": 2,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "98:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"id": 3,
+										"nodeType": "ArrayTypeName",
+										"src": "98:8:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+											"typeString": "string[]"
+										}
+									},
+									"visibility": "public"
+								},
+								{
+									"body": {
+										"id": 15,
+										"nodeType": "Block",
+										"src": "139:36:0",
+										"statements": [
+											{
+												"expression": {
+													"id": 13,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"lValueRequested": false,
+													"leftHandSide": {
+														"id": 7,
+														"name": "_logs",
+														"nodeType": "Identifier",
+														"overloadedDeclarations": [],
+														"referencedDeclaration": 4,
+														"src": "146:5:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+															"typeString": "string storage ref[] storage ref"
+														}
+													},
+													"nodeType": "Assignment",
+													"operator": "=",
+													"rightHandSide": {
+														"arguments": [
+															{
+																"hexValue": "30",
+																"id": 11,
+																"isConstant": false,
+																"isLValue": false,
+																"isPure": true,
+																"kind": "number",
+																"lValueRequested": false,
+																"nodeType": "Literal",
+																"src": "167:1:0",
+																"typeDescriptions": {
+																	"typeIdentifier": "t_rational_0_by_1",
+																	"typeString": "int_const 0"
+																},
+																"value": "0"
+															}
+														],
+														"expression": {
+															"argumentTypes": [
+																{
+																	"typeIdentifier": "t_rational_0_by_1",
+																	"typeString": "int_const 0"
+																}
+															],
+															"id": 10,
+															"isConstant": false,
+															"isLValue": false,
+															"isPure": true,
+															"lValueRequested": false,
+															"nodeType": "NewExpression",
+															"src": "154:12:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_array$_t_string_memory_ptr_$dyn_memory_ptr_$",
+																"typeString": "function (uint256) pure returns (string memory[] memory)"
+															},
+															"typeName": {
+																"baseType": {
+																	"id": 8,
+																	"name": "string",
+																	"nodeType": "ElementaryTypeName",
+																	"src": "158:6:0",
+																	"typeDescriptions": {
+																		"typeIdentifier": "t_string_storage_ptr",
+																		"typeString": "string"
+																	}
+																},
+																"id": 9,
+																"nodeType": "ArrayTypeName",
+																"src": "158:8:0",
+																"typeDescriptions": {
+																	"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+																	"typeString": "string[]"
+																}
+															}
+														},
+														"id": 12,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": true,
+														"kind": "functionCall",
+														"lValueRequested": false,
+														"names": [],
+														"nodeType": "FunctionCall",
+														"src": "154:15:0",
+														"tryCall": false,
+														"typeDescriptions": {
+															"typeIdentifier": "t_array$_t_string_memory_ptr_$dyn_memory_ptr",
+															"typeString": "string memory[] memory"
+														}
+													},
+													"src": "146:23:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+														"typeString": "string storage ref[] storage ref"
+													}
+												},
+												"id": 14,
+												"nodeType": "ExpressionStatement",
+												"src": "146:23:0"
+											}
+										]
+									},
+									"id": 16,
+									"implemented": true,
+									"kind": "constructor",
+									"modifiers": [],
+									"name": "",
+									"nameLocation": "-1:-1:-1",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 5,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "137:2:0"
+									},
+									"returnParameters": {
+										"id": 6,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "139:0:0"
+									},
+									"scope": 29,
+									"src": "126:49:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "internal"
+								},
+								{
+									"body": {
+										"id": 27,
+										"nodeType": "Block",
+										"src": "227:32:0",
+										"statements": [
+											{
+												"expression": {
+													"arguments": [
+														{
+															"id": 24,
+															"name": "message",
+															"nodeType": "Identifier",
+															"overloadedDeclarations": [],
+															"referencedDeclaration": 18,
+															"src": "245:7:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_string_memory_ptr",
+																"typeString": "string memory"
+															}
+														}
+													],
+													"expression": {
+														"argumentTypes": [
+															{
+																"typeIdentifier": "t_string_memory_ptr",
+																"typeString": "string memory"
+															}
+														],
+														"expression": {
+															"id": 21,
+															"name": "_logs",
+															"nodeType": "Identifier",
+															"overloadedDeclarations": [],
+															"referencedDeclaration": 4,
+															"src": "234:5:0",
+															"typeDescriptions": {
+																"typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+																"typeString": "string storage ref[] storage ref"
+															}
+														},
+														"id": 23,
+														"isConstant": false,
+														"isLValue": false,
+														"isPure": false,
+														"lValueRequested": false,
+														"memberName": "push",
+														"nodeType": "MemberAccess",
+														"src": "234:10:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_string_storage_$dyn_storage_ptr_$_t_string_storage_$returns$__$bound_to$_t_array$_t_string_storage_$dyn_storage_ptr_$",
+															"typeString": "function (string storage ref[] storage pointer,string storage ref)"
+														}
+													},
+													"id": 25,
+													"isConstant": false,
+													"isLValue": false,
+													"isPure": false,
+													"kind": "functionCall",
+													"lValueRequested": false,
+													"names": [],
+													"nodeType": "FunctionCall",
+													"src": "234:19:0",
+													"tryCall": false,
+													"typeDescriptions": {
+														"typeIdentifier": "t_tuple$__$",
+														"typeString": "tuple()"
+													}
+												},
+												"id": 26,
+												"nodeType": "ExpressionStatement",
+												"src": "234:19:0"
+											}
+										]
+									},
+									"id": 28,
+									"implemented": true,
+									"kind": "function",
+									"modifiers": [],
+									"name": "_log",
+									"nameLocation": "190:4:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 18,
+												"mutability": "mutable",
+												"name": "message",
+												"nameLocation": "209:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "195:21:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "195:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "194:23:0"
+									},
+									"returnParameters": {
+										"id": 20,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "227:0:0"
+									},
+									"scope": 29,
+									"src": "181:78:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "internal"
+								}
+							],
+							"scope": 30,
+							"src": "60:202:0",
+							"usedErrors": []
+						}
+					],
+					"src": "33:231:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

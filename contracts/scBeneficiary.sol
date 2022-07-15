@@ -77,7 +77,7 @@ abstract contract ScotchBeneficiary is Ownable {
       uint256 balance = hostTokenContract.balanceOf(current);
       require(balance >= amount, "Send Amount exceeds Smart Contract's ERC-20 token balance!");
       // send ERC-20 token amount to recipient
-      hostTokenContract.transfer(_beneficiary.recipient, amount);
+      hostTokenContract.safeTransfer(_beneficiary.recipient, amount);
     }
   }
 

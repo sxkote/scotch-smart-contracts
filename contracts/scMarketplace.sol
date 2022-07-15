@@ -86,7 +86,6 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
   uint public _maxItemsForSale;
 
 
-
   constructor() {
     _beneficiary = Beneficiary(BeneficiaryMode.None, payable(address(0)));
     _activeItems = new uint256[](0);
@@ -277,7 +276,6 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
   // ===========================================
   // =========== Owner's functions =============
   // ===========================================
-
   // set maximum amount of items that could be sold
   function setMaxItemsForSale(uint maxItemsForSale) public onlyOwner {
     _maxItemsForSale = maxItemsForSale;
@@ -446,7 +444,6 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
     uint256 sellerAmount = priceAmount - feeAmount;
     require(sellerAmount > 0, "Invalid Seller Amount calculated!");
 
-
     // charge price and fees in Native Token
     if (priceContract == address(0))
     {
@@ -467,6 +464,7 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
 
       // check price amount allowance to marketplace
       IERC20 hostPriceContract = IERC20(priceContract);
+
       uint256 priceAllowance = hostPriceContract.allowance(buyer, marketplace);
       require(priceAllowance >= priceAmount, "Please allow Price amount of ERC-20 Token in order to complete purchase");
 
@@ -474,11 +472,11 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
       hostPriceContract.safeTransferFrom(buyer, marketplace, priceAmount);
 
       // transfer seller-amount to seller
-      hostPriceContract.transfer(seller, sellerAmount);
+      hostPriceContract.safeTransfer(seller, sellerAmount);
 
       // send fee funds to _beneficiary
       if (_isBeneficiaryExists() && feeAmount > 0)
-        hostPriceContract.transfer(_beneficiary.recipient, feeAmount);
+        hostPriceContract.safeTransfer(_beneficiary.recipient, feeAmount);
     }
 
     return feeAmount;

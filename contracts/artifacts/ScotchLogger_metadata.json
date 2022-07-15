@@ -1,0 +1,65 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "_logs",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/scLogger.sol": "ScotchLogger"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/scLogger.sol": {
+			"keccak256": "0x4b3382b15bfbb2bcd949013dcfd4373611ec16a35226a5d7bc5f6ede0fdf4a57",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d80c7aae31e450dc0f43e88274702d78b75d2ae4aa5e86d7c87c1401fe578e9c",
+				"dweb:/ipfs/QmVotQ7bxW44Tjf18iZJ6Vf8PvaQW6jxE83TcoqvNRjoNx"
+			]
+		}
+	},
+	"version": 1
+}
