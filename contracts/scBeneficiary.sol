@@ -2,10 +2,12 @@
 pragma solidity ^0.8.8;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+ 
 
 abstract contract ScotchBeneficiary is Ownable {
+  using SafeERC20 for IERC20;
 
    // Beneficiary (commission recipient) Mode
   enum BeneficiaryMode{
@@ -70,7 +72,7 @@ abstract contract ScotchBeneficiary is Ownable {
     }
     else {
       // get ERC-20 Token Contract
-      ERC20 hostTokenContract = ERC20(tokenContract);
+      IERC20 hostTokenContract = IERC20(tokenContract);
       // get Scotch Marketplace balance in ERC-20 Token
       uint256 balance = hostTokenContract.balanceOf(current);
       require(balance >= amount, "Send Amount exceeds Smart Contract's ERC-20 token balance!");

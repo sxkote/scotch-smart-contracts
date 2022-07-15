@@ -2,16 +2,15 @@
 pragma solidity ^0.8.8;
 pragma experimental ABIEncoderV2;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./iDistributor.sol";
 import "./scBeneficiary.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 // V1.8
 contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
+  using SafeERC20 for IERC20;
 
   // Market-Item Status
   enum MarketItemStatus {
@@ -185,7 +184,7 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
     uint256 tokenId = _items[marketItemId].tokenId;
 
     // nft token contract && approval for nft
-    ERC721 hostTokenContract = ERC721(_items[marketItemId].tokenContract);
+    IERC721 hostTokenContract = IERC721(_items[marketItemId].tokenContract);
     bool allApproved = hostTokenContract.isApprovedForAll(seller, address(this));
     if (!allApproved) {
       address approvedAddress = hostTokenContract.getApproved(tokenId);
@@ -329,7 +328,7 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
 
   // check if original NFT is valid to be placed on Marketplace
   function _checkTokenValidity(address seller, address tokenContract, uint256 tokenId) private view returns (int) {
-    ERC721 hostTokenContract = ERC721(tokenContract);
+    IERC721 hostTokenContract = IERC721(tokenContract);
 
     // get owner of the NFT (seller should be the owner of the NFT)
     address tokenOwner = hostTokenContract.ownerOf(tokenId);
@@ -467,13 +466,12 @@ contract ScotchMarketplace is ScotchBeneficiary, ReentrancyGuard {
       address marketplace = address(this);
 
       // check price amount allowance to marketplace
-      ERC20 hostPriceContract = ERC20(priceContract);
+      IERC20 hostPriceContract = IERC20(priceContract);
       uint256 priceAllowance = hostPriceContract.allowance(buyer, marketplace);
       require(priceAllowance >= priceAmount, "Please allow Price amount of ERC-20 Token in order to complete purchase");
 
       // transfer price amount to marketplace
-      bool priceTransfered = hostPriceContract.transferFrom(buyer, marketplace, priceAmount);
-      require(priceTransfered, "Could not withdraw Price amount of ERC-20 Token from buyers wallet");
+      hostPriceContract.safeTransferFrom(buyer, marketplace, priceAmount);
 
       // transfer seller-amount to seller
       hostPriceContract.transfer(seller, sellerAmount);
