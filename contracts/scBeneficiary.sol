@@ -4,7 +4,7 @@ pragma solidity ^0.8.8;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
- 
+
 
 abstract contract ScotchBeneficiary is Ownable {
   using SafeERC20 for IERC20;
@@ -37,7 +37,6 @@ abstract contract ScotchBeneficiary is Ownable {
   function getBeneficiary() public view returns (Beneficiary memory) {
     return _beneficiary;
   }
-
 
   // ===========================================
   // =========== Owner's functions =============
