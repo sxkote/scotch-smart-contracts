@@ -1,0 +1,87 @@
+{
+	"compiler": {
+		"version": "0.8.16+commit.07a7930e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "getPartnerByName",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "address payable",
+								"name": "recipient",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "cashbackRate",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct IPartners.Partner",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/iPartners.sol": "IPartners"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/iPartners.sol": {
+			"keccak256": "0xcff54e0db85803393075a6dc6d1642bdba124e196b74aa1e47878381aa4d9dfa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a6c8f3082bb21f10b295924e2bc00f50ef86847a556e7da38f2bf8e343d8f5da",
+				"dweb:/ipfs/QmV8Hk8YvDLEZ6X5dQnLqYAQLSCuNYnUcQrr6oeWi2bhS4"
+			]
+		}
+	},
+	"version": 1
+}
