@@ -1,6 +1,36 @@
 # scotch-smart-contracts
 SCOTCH.SALE Smart Contract
 
+## BSC 
+
+
+**wMarketplace:** [0x398ae0caf46af9ca16f010389a6505957d12385a](https://bscscan.com/address/0x398ae0caf46af9ca16f010389a6505957d12385a)
+
+**sxNFT:** [0xa19d5299f675365ffb3e9e50177c4c5248f0c24b](https://bscscan.com/address/0xa19d5299f675365ffb3e9e50177c4c5248f0c24b)
+
+**Wrapper:** [0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773](https://bscscan.com/address/0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773)
+
+
+## Polygon
+
+**wMarketplace:** [0x07b77bdb5864532a57ae46d3bb89a06857c0ca15](https://polygonscan.com/address/0x07b77bdb5864532a57ae46d3bb89a06857c0ca15)
+
+**sxNFT:** [0x537e0fd2bf1e0f719bedc1871e17da7ffb7a07f7](https://polygonscan.com/address/0x537e0fd2bf1e0f719bedc1871e17da7ffb7a07f7)
+
+**Wrapper:** [0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773](https://polygonscan.com/address/0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773)
+
+
+## Ethereum 
+
+**wMarketplace:** [0x91bfce317111f14737b6f5c892785c2aaf4dfd7b](https://etherscan.io/address/0x91bfce317111f14737b6f5c892785c2aaf4dfd7b)
+
+**sxNFT:** [0x672d4a10441c6f05ce3fd932aecbbdcb484f2d63](https://etherscan.io/address/0x672d4a10441c6f05ce3fd932aecbbdcb484f2d63)
+
+**Wrapper:** [0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773](https://etherscan.io/address/0xc2571ebbc8f2af4f832bb8a2d3a4b0932ce24773)
+
+
+
+
 
 Source Code: `/contracts/`
 
